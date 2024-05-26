@@ -1,0 +1,14 @@
+<div class="container">
+    <h2>Bienvenido, Usuario</h2>
+    <button (click)="registrarEntrada()">Registrar Entrada</button>
+    <button (click)="registrarSalida()">Registrar Salida</button>
+    
+    <div>
+      <label for="nuevaContrasena">Nueva Contraseña:</label>
+      <input type="password" id="nuevaContrasena" [(ngModel)]="nuevaContrasena">
+      <button (click)="actualizarContrasena()">Actualizar Contraseña</button>
+    </div>
+    
+    <p class="message" [ngClass]="{'success': message?.includes('exitosamente'), 'error': message?.includes('Error')}">{{ message }}</p>
+  </div>
+  

@@ -1,0 +1,45 @@
+<div class="container">
+    <h2>Admin Dashboard</h2>
+
+    <div>
+        <div>
+            <label for="correo">Correo:</label>
+            <input type="email" id="correo" [(ngModel)]="usuario.correo" name="correo" required>
+        </div>
+        <div>
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" [(ngModel)]="usuario.nombre" name="nombre" required>
+        </div>
+        <div>
+            <label for="contrasena">Contraseña:</label>
+            <input type="password" id="contrasena" [(ngModel)]="usuario.contrasena" name="contrasena" required>
+        </div>
+        <button (click)="crearUsuario()">Crear Usuario</button>
+        <button (click)="actualizarUsuario()">Actualizar Usuario</button>
+    </div>
+
+    <div>
+        <label for="deleteCorreo">Correo para eliminar:</label>
+        <input type="email" id="deleteCorreo" [(ngModel)]="deleteCorreo" name="deleteCorreo" required>
+        <button (click)="eliminarUsuario()">Eliminar Usuario</button>
+    </div>
+
+    <div>
+        <button (click)="obtenerUsuarios()">Obtener Usuarios</button>
+        <table>
+            <tr>
+                <th>Nombre</th>
+                <th>Correo</th>
+                <th>Contraseña</th>
+            </tr>
+            <tr *ngFor="let usuario of usuarios">
+                <td>{{ usuario.nombre }}</td>
+                <td>{{ usuario.correo }}</td>
+                <td>{{ usuario.contrasena }}</td>
+            </tr>
+        </table>
+    </div>
+
+    <p class="message" [ngClass]="{'success': message?.includes('exitosamente'), 'error': message?.includes('Error')}">
+        {{ message }}</p>
+</div>
