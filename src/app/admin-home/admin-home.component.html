@@ -1,45 +1,86 @@
 <div class="container">
-    <h2>Admin Dashboard</h2>
-
-    <div>
-        <div>
-            <label for="correo">Correo:</label>
-            <input type="email" id="correo" [(ngModel)]="usuario.correo" name="correo" required>
-        </div>
-        <div>
-            <label for="nombre">Nombre:</label>
-            <input type="text" id="nombre" [(ngModel)]="usuario.nombre" name="nombre" required>
-        </div>
-        <div>
-            <label for="contrasena">Contraseña:</label>
-            <input type="password" id="contrasena" [(ngModel)]="usuario.contrasena" name="contrasena" required>
-        </div>
-        <button (click)="crearUsuario()">Crear Usuario</button>
-        <button (click)="actualizarUsuario()">Actualizar Usuario</button>
+    <h1>Administración de Usuarios</h1>
+    
+    <div class="form-section">
+      <h2>Crear/Actualizar Usuario</h2>
+      <form>
+        <label for="nombre">Nombre:</label>
+        <input id="nombre" [(ngModel)]="usuario.nombre" name="nombre" required>
+        
+        <label for="correo">Correo:</label>
+        <input id="correo" [(ngModel)]="usuario.correo" name="correo" required>
+        
+        <label for="contrasena">Contraseña:</label>
+        <input id="contrasena" [(ngModel)]="usuario.contrasena" name="contrasena" type="password" required>
+        
+        <button type="button" (click)="crearUsuario()">Crear Usuario</button>
+        <button type="button" (click)="actualizarUsuario()">Actualizar Usuario</button>
+      </form>
     </div>
-
-    <div>
-        <label for="deleteCorreo">Correo para eliminar:</label>
-        <input type="email" id="deleteCorreo" [(ngModel)]="deleteCorreo" name="deleteCorreo" required>
-        <button (click)="eliminarUsuario()">Eliminar Usuario</button>
+    
+    <div class="form-section">
+      <h2>Eliminar Usuario</h2>
+      <form>
+        <label for="deleteCorreo">Correo del usuario a eliminar:</label>
+        <input id="deleteCorreo" [(ngModel)]="deleteCorreo" name="deleteCorreo" required>
+        
+        <button type="button" (click)="eliminarUsuario()">Eliminar Usuario</button>
+      </form>
     </div>
-
-    <div>
-        <button (click)="obtenerUsuarios()">Obtener Usuarios</button>
-        <table>
-            <tr>
-                <th>Nombre</th>
-                <th>Correo</th>
-                <th>Contraseña</th>
-            </tr>
-            <tr *ngFor="let usuario of usuarios">
-                <td>{{ usuario.nombre }}</td>
-                <td>{{ usuario.correo }}</td>
-                <td>{{ usuario.contrasena }}</td>
-            </tr>
-        </table>
+    
+    <div class="form-section">
+      <h2>Listar Usuarios</h2>
+      <button type="button" (click)="obtenerUsuarios()">Obtener Todos los Usuarios</button>
+      <button type="button" (click)="listarUsers()">Obtener Usuarios Tipo USER</button>
+      <button type="button" (click)="listarAdmins()">Obtener Usuarios Tipo ADMIN</button>
+      
+      <div *ngIf="usuarios.length">
+        <h3>Todos los Usuarios</h3>
+        <ul>
+          <li *ngFor="let usuario of usuarios">{{ usuario.nombre }} ({{ usuario.correo }})</li>
+        </ul>
+      </div>
+      
+      <div *ngIf="users.length">
+        <h3>Usuarios Tipo USER</h3>
+        <ul>
+          <li *ngFor="let user of users">{{ user.nombre }} ({{ user.correo }})</li>
+        </ul>
+      </div>
+      
+      <div *ngIf="admins.length">
+        <h3>Usuarios Tipo ADMIN</h3>
+        <ul>
+          <li *ngFor="let admin of admins">{{ admin.nombre }} ({{ admin.correo }})</li>
+        </ul>
+      </div>
     </div>
-
-    <p class="message" [ngClass]="{'success': message?.includes('exitosamente'), 'error': message?.includes('Error')}">
-        {{ message }}</p>
-</div>
+    
+    <div class="form-section">
+      <h2>Usuarios sin Fichaje en la Última Semana</h2>
+      <form>
+        <label for="mes">Mes:</label>
+        <input id="mes" [(ngModel)]="dateDTO.mes" name="mes" required>
+        
+        <label for="diaInicio">Día de Inicio:</label>
+        <input id="diaInicio" [(ngModel)]="dateDTO.diaInicio" name="diaInicio" required>
+        
+        <label for="diaFin">Día Fin:</label>
+        <input id="diaFin" [(ngModel)]="dateDTO.diaFin" name="diaFin" required>
+        
+        <button type="button" (click)="getUsuariosSinFichar()">Obtener Usuarios Sin Fichar</button>
+      </form>
+      
+      <div *ngIf="usuariosSinFichar.length">
+        <h3>Usuarios Sin Fichar</h3>
+        <ul>
+          <li *ngFor="let usuario of usuariosSinFichar">{{ usuario.nombre }} ({{ usuario.correo }})</li>
+        </ul>
+      </div>
+    </div>
+    
+    <div *ngIf="message" class="message">
+      {{ message }}
+    </div>
+  </div>
+  

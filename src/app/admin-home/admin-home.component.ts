@@ -4,9 +4,16 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 interface Usuario {
+  id?: number;
   nombre: string;
   correo: string;
   contrasena: string;
+}
+
+interface DateDTO {
+  mes: number;
+  diaInicio: number;
+  diaFin: number;
 }
 
 @Component({
@@ -21,6 +28,10 @@ export class AdminHomeComponent {
   deleteCorreo: string = '';
   message: string | null = null;
   usuarios: Usuario[] = [];
+  users: Usuario[] = [];
+  admins: Usuario[] = [];
+  dateDTO: DateDTO = { mes: 0, diaInicio: 0, diaFin: 0 };
+  usuariosSinFichar: Usuario[] = [];
 
   constructor(private http: HttpClient) { }
 
@@ -29,6 +40,7 @@ export class AdminHomeComponent {
       this.http.post('http://localhost:8080/api/admin/usuario', this.usuario).subscribe(
         response => {
           this.message = 'Usuario creado exitosamente';
+          this.obtenerUsuarios();
         },
         error => {
           this.message = 'Error al crear usuario';
@@ -44,6 +56,7 @@ export class AdminHomeComponent {
       this.http.put('http://localhost:8080/api/admin/actualizarUsuario', this.usuario).subscribe(
         response => {
           this.message = 'Usuario actualizado exitosamente';
+          this.obtenerUsuarios();
         },
         error => {
           this.message = 'Error al actualizar usuario';
@@ -60,6 +73,7 @@ export class AdminHomeComponent {
       this.http.request('delete', 'http://localhost:8080/api/admin/eliminarUsuario', { body }).subscribe(
         response => {
           this.message = 'Usuario eliminado exitosamente';
+          this.obtenerUsuarios();
         },
         error => {
           this.message = 'Error al eliminar usuario';
@@ -77,6 +91,39 @@ export class AdminHomeComponent {
       },
       error => {
         this.message = 'Error al obtener usuarios';
+      }
+    );
+  }
+
+  listarUsers() {
+    this.http.get<Usuario[]>('http://localhost:8080/api/admin/users').subscribe(
+      response => {
+        this.users = response;
+      },
+      error => {
+        this.message = 'Error al obtener usuarios tipo USER';
+      }
+    );
+  }
+
+  listarAdmins() {
+    this.http.get<Usuario[]>('http://localhost:8080/api/admin/admins').subscribe(
+      response => {
+        this.admins = response;
+      },
+      error => {
+        this.message = 'Error al obtener usuarios tipo ADMIN';
+      }
+    );
+  }
+
+  getUsuariosSinFichar() {
+    this.http.post<Usuario[]>('http://localhost:8080/api/admin/sin-fichaje-semana-anterior', this.dateDTO).subscribe(
+      response => {
+        this.usuariosSinFichar = response;
+      },
+      error => {
+        this.message = 'Error al obtener usuarios sin fichar';
       }
     );
   }

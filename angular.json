@@ -25,7 +25,8 @@
               "src/styles.css"
             ],
             "scripts": [],
-            "baseHref": "/TFGAngular/"
+            "baseHref": "/TFGAngular/",
+            "polyfills": "src/polyfills.ts" 
           },
           "configurations": {
             "production": {
