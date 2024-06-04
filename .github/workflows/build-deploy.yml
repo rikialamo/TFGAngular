@@ -32,16 +32,6 @@ jobs:
     - name: Build
       run: npm run build
 
-    - name: List root directory contents (for debugging)
-      run: ls -la
-
-    - name: List dist directory contents (for debugging)
-      run: ls -la dist
-
-    - name: List dist/TFGAngular directory contents (for debugging)
-      run: ls -la dist/TFGAngular
-      continue-on-error: true
-
   merge:
     runs-on: ubuntu-latest
     needs: setup
