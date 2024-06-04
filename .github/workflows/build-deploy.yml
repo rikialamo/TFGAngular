@@ -46,12 +46,12 @@ jobs:
 
     - name: Configure Git
       run: |
-        git config --global user.email "you@example.com"
-        git config --global user.name "Your Name"
+        git config --global user.email "rikialamo@gmial.com"
+        git config --global user.name "Ricardo"
 
     - name: Merge main into gh-pages
       run: |
-        git remote add origin https://github.com/${{ github.repository }}
+        if git remote | grep origin; then git remote set-url origin https://github.com/rikialamo/TFGAngular; else git remote add origin https://github.com/rikialamo/TFGAngular; fi
         git fetch origin main
         git checkout gh-pages
         git merge origin/main --no-ff
