@@ -12,8 +12,6 @@ jobs:
     steps:
     - name: Checkout main branch
       uses: actions/checkout@v3
-      with:
-        ref: main
 
     - name: Setup Node.js
       uses: actions/setup-node@v3
@@ -23,7 +21,7 @@ jobs:
     - name: Cache NPM dependencies
       uses: actions/cache@v3
       with:
-        path: node_modules
+        path: ~/.npm
         key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
         restore-keys: |
           ${{ runner.os }}-node-
@@ -43,15 +41,15 @@ jobs:
       uses: actions/checkout@v3
       with:
         ref: gh-pages
+        fetch-depth: 0
 
     - name: Configure Git
       run: |
-        git config --global user.email "rikialamo@gmial.com"
+        git config --global user.email "rikialamo@gmail.com"
         git config --global user.name "Ricardo"
 
     - name: Merge main into gh-pages
       run: |
-        if git remote | grep origin; then git remote set-url origin https://github.com/rikialamo/TFGAngular; else git remote add origin https://github.com/rikialamo/TFGAngular; fi
         git fetch origin main
         git checkout gh-pages
         git merge origin/main --allow-unrelated-histories --no-ff
@@ -66,6 +64,7 @@ jobs:
       uses: actions/checkout@v3
       with:
         ref: gh-pages
+        fetch-depth: 0
 
     - name: Deploy
       uses: JamesIves/github-pages-deploy-action@v4
