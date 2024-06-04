@@ -32,6 +32,10 @@ jobs:
     - name: Build
       run: npm run deploy
 
+    - name: List contents of root directory (for debugging)
+      run: ls -la
+      continue-on-error: true
+
     - name: List contents of dist directory (for debugging)
       run: ls -la dist
       continue-on-error: true
