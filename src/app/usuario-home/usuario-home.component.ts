@@ -10,11 +10,15 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [FormsModule, CommonModule]
 })
-export class UsuarioHomeComponent {
+export class UsuarioHomeComponent implements OnInit{
   nuevaContrasena: string = '';
   message: string | null = null;
+  email: string | null = null;
 
   constructor(private http: HttpClient) { }
+  ngOnInit(): void {
+    this.email = localStorage.getItem('correo');
+  }
 
   registrarEntrada() {
     const credentials = JSON.parse(localStorage.getItem('userCredentials') || '{}');
