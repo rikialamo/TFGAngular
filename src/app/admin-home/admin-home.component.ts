@@ -37,7 +37,7 @@ export class AdminHomeComponent {
 
   crearUsuario() {
     if (this.usuario.nombre && this.usuario.correo && this.usuario.contrasena) {
-      this.http.post('http://localhost:8080/api/admin/usuario', this.usuario).subscribe(
+      this.http.post('https://gestionhorario-api.azurewebsites.net/api/admin/usuario', this.usuario).subscribe(
         response => {
           this.message = 'Usuario creado exitosamente';
           this.obtenerUsuarios();
@@ -53,7 +53,7 @@ export class AdminHomeComponent {
 
   actualizarUsuario() {
     if (this.usuario.nombre && this.usuario.correo && this.usuario.contrasena) {
-      this.http.put('http://localhost:8080/api/admin/actualizarUsuario', this.usuario).subscribe(
+      this.http.put('https://gestionhorario-api.azurewebsites.net/api/admin/actualizarUsuario', this.usuario).subscribe(
         response => {
           this.message = 'Usuario actualizado exitosamente';
           this.obtenerUsuarios();
@@ -70,7 +70,7 @@ export class AdminHomeComponent {
   eliminarUsuario() {
     if (this.deleteCorreo) {
       const body = { correo: this.deleteCorreo, contrasena: '' };
-      this.http.request('delete', 'http://localhost:8080/api/admin/eliminarUsuario', { body }).subscribe(
+      this.http.request('delete', 'https://gestionhorario-api.azurewebsites.net/api/admin/eliminarUsuario', { body }).subscribe(
         response => {
           this.message = 'Usuario eliminado exitosamente';
           this.obtenerUsuarios();
@@ -85,7 +85,7 @@ export class AdminHomeComponent {
   }
 
   obtenerUsuarios() {
-    this.http.get<Usuario[]>('http://localhost:8080/api/admin/usuarios').subscribe(
+    this.http.get<Usuario[]>('https://gestionhorario-api.azurewebsites.net/api/admin/usuarios').subscribe(
       response => {
         this.usuarios = response;
       },
@@ -96,7 +96,7 @@ export class AdminHomeComponent {
   }
 
   listarUsers() {
-    this.http.get<Usuario[]>('http://localhost:8080/api/admin/users').subscribe(
+    this.http.get<Usuario[]>('https://gestionhorario-api.azurewebsites.net/api/admin/users').subscribe(
       response => {
         this.users = response;
       },
@@ -107,7 +107,7 @@ export class AdminHomeComponent {
   }
 
   listarAdmins() {
-    this.http.get<Usuario[]>('http://localhost:8080/api/admin/admins').subscribe(
+    this.http.get<Usuario[]>('https://gestionhorario-api.azurewebsites.net/api/admin/admins').subscribe(
       response => {
         this.admins = response;
       },
@@ -118,7 +118,7 @@ export class AdminHomeComponent {
   }
 
   getUsuariosSinFichar() {
-    this.http.post<Usuario[]>('http://localhost:8080/api/admin/sin-fichaje-semana-anterior', this.dateDTO).subscribe(
+    this.http.post<Usuario[]>('https://gestionhorario-api.azurewebsites.net/api/admin/sin-fichaje-semana-anterior', this.dateDTO).subscribe(
       response => {
         this.usuariosSinFichar = response;
       },

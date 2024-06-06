@@ -22,7 +22,7 @@ export class UsuarioHomeComponent implements OnInit{
 
   registrarEntrada() {
     const credentials = JSON.parse(localStorage.getItem('userCredentials') || '{}');
-    this.http.post('http://localhost:8080/api/usuario/entrada', credentials).subscribe(
+    this.http.post('https://gestionhorario-api.azurewebsites.net/api/usuario/entrada', credentials).subscribe(
       response => {
         this.message = 'Entrada registrada exitosamente';
       },
@@ -34,7 +34,7 @@ export class UsuarioHomeComponent implements OnInit{
 
   registrarSalida() {
     const credentials = JSON.parse(localStorage.getItem('userCredentials') || '{}');
-    this.http.post('http://localhost:8080/api/usuario/salida', credentials).subscribe(
+    this.http.post('https://gestionhorario-api.azurewebsites.net/api/usuario/salida', credentials).subscribe(
       response => {
         this.message = 'Salida registrada exitosamente';
       },
@@ -51,7 +51,7 @@ export class UsuarioHomeComponent implements OnInit{
     }
     const credentials = JSON.parse(localStorage.getItem('userCredentials') || '{}');
     const body = { ...credentials, nuevacontrasena: this.nuevaContrasena };
-    this.http.put('http://localhost:8080/api/usuario/actualizarContrasena', body).subscribe(
+    this.http.put('https://gestionhorario-api.azurewebsites.net/api/usuario/actualizarContrasena', body).subscribe(
       response => {
         this.message = 'Contraseña actualizada exitosamente';
       },
