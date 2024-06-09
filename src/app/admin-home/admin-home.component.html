@@ -19,7 +19,8 @@
       </div>
       <div class="button-group">
         <button type="button" class="btn btn-primary" (click)="crearUsuario()">Crear Usuario</button>
-        <button type="button" class="btn btn-secondary" (click)="actualizarUsuario()">Actualizar Usuario</button>
+        <button type="button" class="btn btn-primary" (click)="crearAdmin()">Crear Admin</button>
+        <button type="button" class="btn btn-primary" (click)="actualizarUsuario()">Actualizar Usuario</button>
       </div>
     </form>
   </div>
@@ -39,8 +40,8 @@
     <h2>Listar Usuarios</h2>
     <div class="button-group">
       <button type="button" class="btn btn-primary" (click)="obtenerUsuarios()">Obtener Todos los Usuarios</button>
-      <button type="button" class="btn btn-secondary" (click)="listarUsers()">Obtener Usuarios Tipo USER</button>
-      <button type="button" class="btn btn-secondary" (click)="listarAdmins()">Obtener Usuarios Tipo ADMIN</button>
+      <button type="button" class="btn btn-primary" (click)="listarUsers()">Obtener Usuarios Tipo USER</button>
+      <button type="button" class="btn btn-primary" (click)="listarAdmins()">Obtener Usuarios Tipo ADMIN</button>
     </div>
     <div *ngIf="usuarios.length">
       <h3>Todos los Usuarios</h3>

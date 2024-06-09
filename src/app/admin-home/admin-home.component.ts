@@ -51,6 +51,22 @@ export class AdminHomeComponent {
     }
   }
 
+  crearAdmin() {
+    if (this.usuario.nombre && this.usuario.correo && this.usuario.contrasena) {
+      this.http.post('https://gestionhorario-api.azurewebsites.net/api/admin/admin', this.usuario).subscribe(
+        response => {
+          this.message = 'Admin creado exitosamente';
+          this.obtenerUsuarios();
+        },
+        error => {
+          this.message = 'Error al crear admin: ' + error.message;
+        }
+      );
+    } else {
+      this.message = 'Por favor, completa todos los campos';
+    }
+  }
+
   actualizarUsuario() {
     if (this.usuario.nombre && this.usuario.correo && this.usuario.contrasena) {
       this.http.put('https://gestionhorario-api.azurewebsites.net/api/admin/actualizarUsuario', this.usuario).subscribe(
