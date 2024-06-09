@@ -87,9 +87,6 @@ La motivación detrás de este proyecto es mejorar la productividad y eficiencia
    - **Listar Usuarios de tipo USER**: Clic en "Obtener Usuarios Tipo USER" para obtener la lista de usuarios.
    - **Listar Usuarios de tipo ADMIN**: Clic en "Obtener Usuarios Tipo ADMIN" para obtener la lista de administradores.
 
-## Documentación
-Para más detalles, consulta la [documentación completa](https://github.com/rikialamo/TFGAngular/wiki).
-
 ## Interfaz en Figma
 Explora el diseño de la interfaz en [Figma](https://www.figma.com/file/example).
 
