@@ -99,3 +99,6 @@
   margin-top: 15px;
   color: #d32f2f; /* Rojo */
 }
+ul{
+  list-style-type: none;
+}
